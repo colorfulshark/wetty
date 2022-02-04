@@ -55,14 +55,14 @@ parts:
 
 hooks:
   configure:
-    plugs: [network, network-bind]
+    plugs: [network, network-bind, ssh-keys]
 
 apps:
   wetty:
     command: bin/wetty
-    plugs: [network, network-bind]
+    plugs: [network, network-bind, ssh-keys]
 
   wettysvc:
     command: svc_wrapper.sh
     daemon: forking
-    plugs: [network, network-bind]
+    plugs: [network, network-bind, ssh-keys]

@@ -1,6 +1,6 @@
 name: wetty
 base: core20
-adopt-info: wetty
+version: v2.3.0
 summary: Terminal in browser over http/https.
 description: |
   Terminal over HTTP and https. WeTTY is an alternative to ajaxterm and
@@ -9,20 +9,15 @@ description: |
   JavaScript. WeTTY uses websockets rather then Ajax and hence better
   response time.
 
+grade: stable
 confinement: strict
 
 parts:
   wetty:
     plugin: npm
     npm-node-version: 14.17.3
-    source: https://github.com/butlerx/wetty/archive/refs/tags/v2.3.0.tar.gz
-    build-packages:
-      - jq
-    override-pull: |
-      snapcraftctl pull
-      version=$(cat package.json | jq -r '.version')
-      snapcraftctl set-version "$version"
-      snapcraftctl set-grade "stable"
+    source: https://github.com/butlerx/wetty.git
+    source-tag: ${SNAPCRAFT_PROJECT_VERSION}
     override-build: |
       # install the official nodejs so we get the expected npm version
       if [ $SNAP_ARCH == "amd64" ]; then
